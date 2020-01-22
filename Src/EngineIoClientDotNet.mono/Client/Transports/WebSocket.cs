@@ -2,6 +2,7 @@
 using Quobject.EngineIoClientDotNet.Parser;
 using System;
 using System.Collections.Generic;
+using System.Security.Authentication;
 using WebSocket4Net;
 
 namespace Quobject.EngineIoClientDotNet.Client.Transports
@@ -35,7 +36,7 @@ namespace Quobject.EngineIoClientDotNet.Client.Transports
             var log = LogManager.GetLogger(Global.CallerName());
             log.Info("DoOpen uri =" + this.Uri());
 
-            ws = new WebSocket4Net.WebSocket(this.Uri(), "", Cookies, MyExtraHeaders)
+            ws = new WebSocket4Net.WebSocket(this.Uri(), "", Cookies, MyExtraHeaders, "", "", WebSocketVersion.None, null, SslProtocols.Tls11 | SslProtocols.Tls12)
             {
                 EnableAutoSendPing = false
             };
